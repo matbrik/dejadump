@@ -1,0 +1,26 @@
+{
+  "IDAMetadataDescriptorVersion": 1,
+  "plugin": {
+    "name": "dejadump",
+    "entryPoint": "dejadump_plugin.py",
+    "version": "0.4.0",
+    "description": "DéjàDump — a time axis for the IDA database: versioned code and versioned data (execution epochs / waves) in one IDB, each analysable with full IDA analysis and Hex-Rays pseudocode.",
+    "idaVersions": ">=9.4,<=9.5",
+    "categories": [
+      "decompilation",
+      "debugging-and-tracing",
+      "malware-analysis",
+      "deobfuscation"
+    ],
+    "keywords": ["self-modifying-code", "unpacking", "epochs", "waves", "tenet", "time-travel"],
+    "license": "MIT",
+    "requiresPython": ">=3.10",
+    "urls": {
+      "repository": "https://github.com/matbrik/dejadump"
+    },
+    "authors": [
+      { "name": "Matteo Bricchi", "email": "6418737+matbrik@users.noreply.github.com" }
+    ],
+    "pythonDependencies": []
+  }
+}

@@ -1,0 +1,39 @@
+# Dev/test tooling only. IDA loads the plugin from `ida-plugin.json` +
+# `dejadump_plugin.py` + the `dejadump/` package directly; it does not pip-install.
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dejadump"
+version = "0.4.0"
+description = "A time axis for the IDA database: versioned code and data in one IDB."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Matteo Bricchi", email = "6418737+matbrik@users.noreply.github.com" }]
+
+[project.optional-dependencies]
+# The engine needs nothing beyond the stdlib. These are for the corpus generator
+# and the test suite only.
+corpus = ["unicorn>=2.1"]
+dev = ["pytest>=7", "unicorn>=2.1", "ruff>=0.5"]
+
+[tool.setuptools.packages.find]
+include = ["dejadump*"]
+
+[project.scripts]
+dejadump = "dejadump.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+# Pin the rule set so CI does not change with ruff's defaults: pyflakes plus the
+# syntax/statement errors.  The codebase deliberately keeps %-formatting.
+select = ["E4", "E7", "E9", "F"]

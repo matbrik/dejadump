@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# IDA databases / analysis artifacts
+*.idb
+*.i64
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+*.dejadump.db
+*.dejadump.db-wal
+*.dejadump.db-shm
+*.dejadump.db.v1.bak
+# sidecars written before the rename
+*.palimpsest.db
+*.palimpsest.db-wal
+*.palimpsest.db-shm
+*.palimpsest.db.v1.bak
+
+# Corpus generator scratch output (fixtures under tests/fixtures/ ARE committed)
+tools/mkcorpus/out/
+
+# OS
+.DS_Store
+
+# Real-target material never belongs in this repository: binaries, traces,
+# capture manifests and runtime dumps stay out of tree.
+/*.so
+/*.so.*
+/*.bin
+/*.tenet
+/*.tenet.json
+/*.runtime.bin
+/*.dll
+/*.exe
+/*.dylib
+
+# Local build output
+build/
+dist/
+
+# Private release checklist (kept locally, excluded from the public repository)
+docs/PUBLISHING.md

@@ -1,0 +1,53 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # Core lane: the pure-Python engine, NO IDA and NO binary deps. The corpus
+  # *generation* test auto-skips when Unicorn is absent (importorskip), so this
+  # proves the engine + committed fixtures need nothing but the stdlib + pytest.
+  # test_imports.py additionally imports every IDA-facing module against stubs,
+  # so an uncommitted or broken plugin module fails here, not inside IDA.
+  core:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
+      - run: python -m pip install --upgrade pip pytest
+      - name: Validate ida-plugin.json is strict JSON
+        run: python -c "import json; json.load(open('ida-plugin.json')); print('ida-plugin.json OK')"
+      - run: python -m pytest
+
+  # Generator lane: adds Unicorn so the corpus determinism / fixture-drift tests
+  # actually run. Still no IDA, no secrets.
+  generator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip pytest "unicorn>=2.1"
+      - run: python -m pytest
+
+  # Lint + package lane: style errors and publish blockers that do not need IDA
+  # (oversized tracked files, imports of files git does not track).
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --upgrade pip "ruff>=0.5"
+      - run: ruff check dejadump dejadump_plugin.py tools tests
+      - run: python tools/check_package.py --ci

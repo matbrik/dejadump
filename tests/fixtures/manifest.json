@@ -1,0 +1,84 @@
+{
+  "arch": "arm64",
+  "page": 4096,
+  "regions": {
+    "code": {
+      "base": 1048576,
+      "size": 8192
+    },
+    "buf": {
+      "base": 2097152,
+      "size": 4096
+    },
+    "data": {
+      "base": 3145728,
+      "size": 4096
+    }
+  },
+  "key": 90,
+  "markers": [
+    170,
+    187,
+    204
+  ],
+  "plaintext": "DEJADUMP_OK!!!!\u0000",
+  "mutator_size": 312,
+  "final_buf": "8919805249000039c0035fd6",
+  "dumps": {
+    "code": {
+      "base": 1048576,
+      "path": "dumps/arm64_smc_code_t0.bin"
+    },
+    "buf": {
+      "base": 2097152,
+      "path": "dumps/arm64_smc_buf_t0.bin"
+    },
+    "data": {
+      "base": 3145728,
+      "path": "dumps/arm64_smc_data_t0.bin"
+    }
+  },
+  "elf": "arm64_smc.elf",
+  "x64": {
+    "arch": "x86-64",
+    "page": 4096,
+    "regions": {
+      "code": {
+        "base": 1048576,
+        "size": 8192
+      },
+      "buf": {
+        "base": 2097152,
+        "size": 4096
+      },
+      "data": {
+        "base": 3145728,
+        "size": 4096
+      }
+    },
+    "key": 90,
+    "markers": [
+      170,
+      187,
+      204
+    ],
+    "plaintext": "DEJADUMP_OK!!!!\u0000",
+    "mutator_size": 152,
+    "final_buf": "c606ccc300000000",
+    "dumps": {
+      "code": {
+        "base": 1048576,
+        "path": "dumps/x64_smc_code_t0.bin"
+      },
+      "buf": {
+        "base": 2097152,
+        "path": "dumps/x64_smc_buf_t0.bin"
+      },
+      "data": {
+        "base": 3145728,
+        "path": "dumps/x64_smc_data_t0.bin"
+      }
+    },
+    "elf": "x64_smc.elf"
+  }
+}
